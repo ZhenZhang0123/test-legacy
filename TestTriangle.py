@@ -7,6 +7,7 @@ The primary goal of this file is to demonstrate a simple unittest implementation
 @author: rk
 """
 
+import math
 import unittest
 
 from Triangle import classifyTriangle
@@ -25,6 +26,27 @@ class TestTriangles(unittest.TestCase):
         
     def testEquilateralTriangles(self): 
         self.assertEqual(classifyTriangle(1,1,1),'Equilateral','1,1,1 should be equilateral')
+
+    def testNegativeInvalidInput(self): 
+        self.assertEqual(classifyTriangle(-1,1,2),'InvalidInput','-1,1,2 invalidInput: negative input')
+
+    def testTooBigInvalidInput(self): 
+        self.assertEqual(classifyTriangle(201,201,300),'InvalidInput','201,201,300 InvalidInput: input too big')
+    
+    def testNotNumberInvalidInput(self): 
+        self.assertEqual(classifyTriangle('a',201,300),'InvalidInput','\'a\',201,300 InvalidInput: not a number')
+
+    def testNotATriangle(self): 
+        self.assertEqual(classifyTriangle(1,1,2),'NotATriangle','1,1,2 not a triangle')
+
+    def testScaleneTriangle(self): 
+        self.assertEqual(classifyTriangle(2,3,4),'Scalene','2,3,4 should be Scalene')
+
+    def testIsocelesTriangles(self): 
+        self.assertEqual(classifyTriangle(2,2,3),'Isoceles','2,2,3 should be isoceles')
+
+    def testRightIsocelesTriangles(self): 
+        self.assertEqual(classifyTriangle(2,2,2 * math.sqrt(2)),'Right Isoceles','2,2,2√2 should be right isoceles')
 
 if __name__ == '__main__':
     print('Running unit tests')
